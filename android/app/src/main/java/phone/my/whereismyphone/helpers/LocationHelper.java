@@ -22,7 +22,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class LocationHelper {
     private static final int REQUEST_LOCATION = 12;
     private static final long MIN_TIME = 20000; //ms
-    private static final float MIN_DISTANCE = 20;
+    private static final float MIN_DISTANCE = 0;
 
     public LocationHelper() {
 

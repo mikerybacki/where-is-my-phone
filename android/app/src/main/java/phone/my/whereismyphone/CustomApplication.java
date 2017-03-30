@@ -2,6 +2,8 @@ package phone.my.whereismyphone;
 
 import android.app.Application;
 
+import timber.log.Timber;
+
 public class CustomApplication extends Application {
     private static CustomApplication sSharedInstance;
 
@@ -17,6 +19,7 @@ public class CustomApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sSharedInstance = this;
+        Timber.plant(new Timber.DebugTree());
     }
 
 }

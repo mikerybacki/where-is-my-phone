@@ -5,6 +5,7 @@ import android.location.LocationListener;
 import android.os.Bundle;
 
 import phone.my.whereismyphone.Cache;
+import phone.my.whereismyphone.network.Api;
 import timber.log.Timber;
 
 public class GPSLocationListener implements LocationListener {
@@ -19,6 +20,7 @@ public class GPSLocationListener implements LocationListener {
         Timber.d("New location: %s", location);
         if (location != null && location.getAccuracy() <= 100) {
             mCache.saveLocation(location);
+            Api.sharedInstance().sendPosition(location);
         }
     }
 
