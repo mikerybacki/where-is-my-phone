@@ -22,4 +22,6 @@ public class PositionReport {
 
     private Long timestamp;
 
+    private String name;
+
 }

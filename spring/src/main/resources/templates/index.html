@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Where is my phone?</title>
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjMCwgxECyFL2bq3OYLMM2tUUG95SoMjM&v=3.27&callback=myMap"></script>
+</head>
+<body>
+
+<script th:inline="javascript">
+  function myMap() {
+    var uluru = {lat: [[${position.getLatitude()}]], lng: [[${position.getLongitude()}]]};
+    var map = new google.maps.Map(document.getElementById('googleMap'), {
+      zoom: 4,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+  }
+</script>
+
+<h2>Where is my phone?</h2>
+<div id="googleMap" style="width:100%;height:600px;"></div>
+
+<p>
+  <span>Latest know position of:</span>
+  <span th:text="${position.getName()}"></span>:
+  <span th:text="${position.getLatitude()}"></span>
+  <span th:text="${position.getLongitude()}"></span>
+  <span th:text="${position.getLongitude()}"></span>
+  <span th:text="${position.getTimestamp()}"></span>
+</p>
+</body>
+</html>

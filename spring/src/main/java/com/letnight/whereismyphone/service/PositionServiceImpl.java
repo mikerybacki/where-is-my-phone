@@ -19,6 +19,11 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
+    public PositionReport getLatestPosition(final String name) {
+        return positionReportRepository.findTopByNameOrderByTimestampDesc(name);
+    }
+
+    @Override
     public List<PositionReport> getPositionReports() {
         final Iterable<PositionReport> positionReports = positionReportRepository.findAll();
         final List<PositionReport> positionReportList = new ArrayList<>();

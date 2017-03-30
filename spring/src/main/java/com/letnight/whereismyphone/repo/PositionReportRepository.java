@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PositionReportRepository extends CrudRepository<PositionReport, Long> {
 
+    PositionReport findTopByNameOrderByTimestampDesc(final String name);
+
 }
