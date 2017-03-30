@@ -1,11 +1,14 @@
 package phone.my.whereismyphone.network;
 
+import android.location.Location;
+
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import phone.my.whereismyphone.BuildConfig;
 import phone.my.whereismyphone.models.Position;
+import phone.my.whereismyphone.models.ResponseInfo;
 import phone.my.whereismyphone.network.interfaces.SpringInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,6 +67,24 @@ public class Api {
 
             @Override
             public void onFailure(Call<List<Position>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void sendPosition(Location location) {
+
+        Position position = new Position(location, "Tomten");
+
+        Call<ResponseInfo> call = mApi.sendPosition(position);
+        call.enqueue(new Callback<ResponseInfo>() {
+            @Override
+            public void onResponse(Call<ResponseInfo> call, Response<ResponseInfo> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseInfo> call, Throwable t) {
 
             }
         });
