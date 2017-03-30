@@ -15,9 +15,13 @@ public class Position {
     @SerializedName("timestamp")
     String mTimestamp;
 
-    public Position(Location location) {
+    @SerializedName("name")
+    String mName;
+
+    public Position(Location location, String name) {
         mLong = String.valueOf(location.getLongitude());
         mLat = String.valueOf(location.getLatitude());
         mTimestamp = String.valueOf(System.currentTimeMillis());
+        mName = name;
     }
 }

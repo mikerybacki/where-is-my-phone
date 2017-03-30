@@ -8,6 +8,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import phone.my.whereismyphone.CustomApplication;
 import phone.my.whereismyphone.R;
 import phone.my.whereismyphone.helpers.LocationHelper;
 
@@ -43,13 +44,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onStart() {
         super.onStart();
-        mLocationHelper.onStart(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mLocationHelper.onStop();
+        if (!CustomApplication.sharedInstance().locationServiceIsRunning()) {
+            if (mLocationHelper.requestLocationPermission(this)) {
+                CustomApplication.sharedInstance().startLocationService();
+            }
+        }
     }
 
     private void initViews() {
@@ -63,7 +62,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        mLocationHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (mLocationHelper.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
+            CustomApplication.sharedInstance().startLocationService();
+        }
     }
 
 }

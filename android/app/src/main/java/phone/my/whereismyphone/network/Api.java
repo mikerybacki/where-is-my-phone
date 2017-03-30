@@ -74,7 +74,7 @@ public class Api {
 
     public void sendPosition(Location location) {
 
-        Position position = new Position(location);
+        Position position = new Position(location, "Tomten");
 
         Call<ResponseInfo> call = mApi.sendPosition(position);
         call.enqueue(new Callback<ResponseInfo>() {

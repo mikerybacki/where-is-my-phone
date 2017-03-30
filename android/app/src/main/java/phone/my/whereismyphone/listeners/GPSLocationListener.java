@@ -9,17 +9,15 @@ import phone.my.whereismyphone.network.Api;
 import timber.log.Timber;
 
 public class GPSLocationListener implements LocationListener {
-    private final Cache mCache;
 
-    public GPSLocationListener(Cache cache) {
-        mCache = cache;
+    public GPSLocationListener() {
     }
 
     @Override
     public void onLocationChanged(Location location) {
         Timber.d("New location: %s", location);
         if (location != null && location.getAccuracy() <= 100) {
-            mCache.saveLocation(location);
+            Cache.sharedInstance().saveLocation(location);
             Api.sharedInstance().sendPosition(location);
         }
     }
