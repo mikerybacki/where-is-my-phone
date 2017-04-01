@@ -1,8 +1,8 @@
 package com.letnight.whereismyphone.service;
 
+import com.google.common.collect.Lists;
 import com.letnight.whereismyphone.domain.PositionReport;
 import com.letnight.whereismyphone.repo.PositionReportRepository;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +20,11 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public PositionReport getLatestPosition(final String name) {
-        return positionReportRepository.findTopByNameOrderByTimestampDesc(name);
+        return positionReportRepository.findTopByNameOrderByLocationTimestampDesc(name);
     }
 
     @Override
     public List<PositionReport> getPositionReports() {
-        final Iterable<PositionReport> positionReports = positionReportRepository.findAll();
-        final List<PositionReport> positionReportList = new ArrayList<>();
-        positionReports.forEach(positionReportList::add);
-        return positionReportList;
+        return Lists.newArrayList(positionReportRepository.findAll());
     }
-
 }

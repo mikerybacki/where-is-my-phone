@@ -1,5 +1,6 @@
 package com.letnight.whereismyphone.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,13 @@ public class PositionReport {
 
     private Double latitude;
 
-    private Long timestamp;
+    private Double accuracy;
+
+    @Column(name = "location_timestamp")
+    private Long locationTimestamp;
+
+    @Column(name = "request_timestamp")
+    private Long requestTimestamp;
 
     private String name;
 

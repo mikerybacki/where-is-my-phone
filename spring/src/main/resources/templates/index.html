@@ -4,20 +4,23 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Where is my phone?</title>
-  <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjMCwgxECyFL2bq3OYLMM2tUUG95SoMjM&v=3.27&callback=myMap"></script>
+  <script
+          async defer
+          th:src="@{https://maps.googleapis.com/maps/api/js?keys=${google.maps.api.key}&v=3.27&callback=myMap}"></script>
 </head>
 <body>
 
 <script th:inline="javascript">
+  var marker;
+
   function myMap() {
-    var uluru = {lat: [[${position.getLatitude()}]], lng: [[${position.getLongitude()}]]};
+    var position = {lat: [[${position.getLatitude()}]], lng: [[${position.getLongitude()}]]};
     var map = new google.maps.Map(document.getElementById('googleMap'), {
-      zoom: 4,
-      center: uluru
+      zoom: 12,
+      center: position
     });
-    var marker = new google.maps.Marker({
-      position: uluru,
+    marker = new google.maps.Marker({
+      position: position,
       map: map
     });
   }
@@ -32,7 +35,7 @@
   <span th:text="${position.getLatitude()}"></span>
   <span th:text="${position.getLongitude()}"></span>
   <span th:text="${position.getLongitude()}"></span>
-  <span th:text="${position.getTimestamp()}"></span>
+  <span th:text="${position.getLocationTimestamp()}"></span>
 </p>
 </body>
 </html>
